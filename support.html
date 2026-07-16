@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Turbo Highway 2026 — Support</title>
+<meta name="description" content="Support, FAQ and contact for Turbo Highway 2026, an arcade racing game by APProve.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0b0b16; --road:#29293d; --road-edge:#3a3a55;
+    --cyan:#00e5ff; --amber:#fa8410; --green:#00ff88; --magenta:#dd00ff; --red:#ff3b30;
+    --ink:#eef0ff; --ink-dim:#9a9ab8;
+    --display:'Chakra Petch',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --data:'Share Tech Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--void); color:var(--ink); font-family:var(--body);
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:var(--cyan)}
+
+  /* ---- the road: this page's spine ---- */
+  .highway{
+    position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%);
+    width:min(880px,94vw); background:var(--road);
+    border-left:2px solid var(--road-edge); border-right:2px solid var(--road-edge);
+    z-index:0; pointer-events:none;
+  }
+  .lane{
+    position:absolute; top:-40px; bottom:-40px; width:3px;
+    background:repeating-linear-gradient(to bottom,
+      var(--cyan) 0 34px, transparent 34px 74px);
+    opacity:.5; animation:scroll 1.6s linear infinite;
+  }
+  .lane.l{left:33.33%} .lane.r{left:66.66%}
+  @keyframes scroll{to{transform:translateY(74px)}}
+  @media (prefers-reduced-motion:reduce){ .lane{animation:none} }
+
+  .wrap{position:relative; z-index:1; width:min(720px,88vw); margin:0 auto; padding:0 0 96px}
+
+  /* ---- hero: the HUD readout ---- */
+  header{padding:88px 0 64px; text-align:center}
+  .plate{
+    display:inline-block; font-family:var(--data); font-size:.72rem; letter-spacing:.28em;
+    color:var(--amber); border:1px solid var(--amber); border-radius:6px;
+    padding:7px 16px; margin-bottom:26px; text-transform:uppercase;
+  }
+  h1{
+    font-family:var(--display); font-weight:700; font-size:clamp(2.1rem,7vw,3.4rem);
+    letter-spacing:.05em; line-height:1.05; text-transform:uppercase;
+    text-shadow:0 0 28px rgba(0,229,255,.45);
+  }
+  h1 .yr{color:var(--cyan)}
+  .sub{color:var(--ink-dim); margin-top:16px; font-size:1.02rem}
+
+  /* ---- the finish card: lifted from the game's end screen ---- */
+  .finish{
+    margin:44px auto 0; max-width:520px;
+    background:rgba(11,11,22,.78); border:1px solid var(--road-edge); border-radius:16px;
+    padding:30px 26px; text-align:center; backdrop-filter:blur(3px);
+  }
+  .finish h2{
+    font-family:var(--display); font-size:1.28rem; letter-spacing:.1em;
+    text-transform:uppercase; margin-bottom:8px;
+  }
+  .finish p{color:var(--ink-dim); font-size:.95rem; margin-bottom:22px}
+  .cta{
+    display:block; font-family:var(--display); font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; text-decoration:none; color:#06060e;
+    background:linear-gradient(90deg,var(--cyan),#7b5cff); border-radius:11px;
+    padding:15px; font-size:1rem;
+    transition:transform .16s ease, box-shadow .16s ease;
+  }
+  .cta:hover,.cta:focus-visible{transform:translateY(-2px); box-shadow:0 10px 34px rgba(0,229,255,.34)}
+  .reply{font-family:var(--data); font-size:.76rem; color:var(--ink-dim); margin-top:14px; letter-spacing:.07em}
+
+  /* ---- exits ---- */
+  .exit{
+    font-family:var(--data); font-size:.7rem; letter-spacing:.26em; color:var(--ink-dim);
+    text-transform:uppercase; margin:76px 0 22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .exit::after{content:''; flex:1; height:1px; background:var(--road-edge)}
+
+  details{
+    border-left:3px solid var(--road-edge); padding:2px 0 2px 20px; margin-bottom:6px;
+    transition:border-color .2s ease;
+  }
+  details[open]{border-left-color:var(--cyan)}
+  summary{
+    font-family:var(--display); font-weight:500; font-size:1.04rem; padding:13px 0;
+    cursor:pointer; list-style:none; color:var(--ink);
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:'▸ '; color:var(--amber); display:inline-block; transition:transform .2s ease}
+  details[open] summary::before{content:'▾ '}
+  summary:focus-visible{outline:2px solid var(--cyan); outline-offset:3px; border-radius:3px}
+  details p{color:var(--ink-dim); font-size:.95rem; padding:0 0 15px}
+  details p + p{padding-top:10px}
+  code{font-family:var(--data); color:var(--green); font-size:.9em}
+
+  /* ---- power-up legend ---- */
+  .perks{list-style:none; display:grid; gap:9px}
+  .perks li{
+    display:flex; gap:13px; align-items:baseline;
+    font-size:.94rem; color:var(--ink-dim);
+    border-bottom:1px solid rgba(58,58,85,.5); padding-bottom:9px;
+  }
+  .perks b{
+    font-family:var(--data); font-size:.76rem; letter-spacing:.11em; text-transform:uppercase;
+    min-width:104px; flex-shrink:0;
+  }
+  .p-mag{color:var(--cyan)} .p-dbl{color:var(--amber)} .p-shd{color:var(--green)}
+  .p-gho{color:var(--magenta)} .p-hrt{color:var(--red)} .p-nit{color:var(--amber)}
+  .p-slo{color:var(--green)}
+
+  footer{
+    margin-top:80px; padding-top:26px; border-top:1px solid var(--road-edge);
+    font-family:var(--data); font-size:.74rem; color:var(--ink-dim);
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; letter-spacing:.06em;
+  }
+  @media(max-width:560px){
+    .perks li{flex-direction:column; gap:3px}
+    header{padding:60px 0 44px}
+  }
+</style>
+</head>
+<body>
+
+<div class="highway" aria-hidden="true">
+  <div class="lane l"></div><div class="lane r"></div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="plate">Support</div>
+    <h1>Turbo Highway <span class="yr">2026</span></h1>
+    <p class="sub">Something broken, confusing, or unfair? Tell me — I read every message.</p>
+
+    <div class="finish">
+      <h2>Get help</h2>
+      <p>Email is the fastest way to reach me. Include your device model and iOS version if you're reporting a bug.</p>
+      <a class="cta" href="mailto:mkcenter007@gmail.com?subject=Turbo%20Highway%202026%20—%20Support">Email support</a>
+      <div class="reply">mkcenter007@gmail.com · replies within 48 hours</div>
+    </div>
+  </header>
+
+  <h2 class="exit">Common questions</h2>
+
+  <details>
+    <summary>Levels 41–60 are locked. How do I open them?</summary>
+    <p>The game gates each phase behind stars, not level count. You need <code>35 stars</code> to open Phase 2 (levels 21–40), and <code>70 stars</code> to open Phase 3 (levels 41–60).</p>
+    <p>Every level awards up to 3 stars based on how far you drive. If you're stuck, replay earlier levels you finished with 1 or 2 stars — those are the cheapest stars to collect.</p>
+  </details>
+
+  <details>
+    <summary>I lost my coins and progress</summary>
+    <p>Progress is stored on your device, not in an account. Deleting the app deletes your save, and there's no cloud backup yet.</p>
+    <p>If your progress vanished without you deleting anything, email me with your device model — that's a bug and I want to see it.</p>
+  </details>
+
+  <details>
+    <summary>How do I remove the ads?</summary>
+    <p>There's no paid ad-removal option right now. Ads appear between runs and are how the game pays for itself.</p>
+    <p>The rewarded ad — the one that revives you after a crash — is always optional. Skip it and you'll go straight to the results screen.</p>
+  </details>
+
+  <details>
+    <summary>The controls feel unresponsive</summary>
+    <p>Your car steers by dragging anywhere on the road, not by tapping the car itself. Keep your thumb down and move — don't lift between lanes.</p>
+    <p>If the whole game stutters, close background apps and restart it. If that doesn't fix it, email me your device model.</p>
+  </details>
+
+  <details>
+    <summary>Can I play without an internet connection?</summary>
+    <p>Yes. Every level, the Garage, and Free Drive work fully offline. Only the ads need a connection — without one, they're skipped.</p>
+  </details>
+
+  <details>
+    <summary>What's a near-miss combo?</summary>
+    <p>Squeeze past a traffic car without hitting it and you bank a near miss. Chain them and the multiplier climbs: <code>x2</code> at 5, <code>x3</code> at 10, <code>x5</code> at 20.</p>
+    <p>Every coin you pick up is multiplied by your current combo. Crashing resets it to zero — nothing else does.</p>
+  </details>
+
+  <h2 class="exit">Power-ups</h2>
+
+  <ul class="perks">
+    <li><b class="p-hrt">Heart</b><span>Restores one life. You start every run with three.</span></li>
+    <li><b class="p-shd">Shield</b><span>Absorbs one crash without costing a heart.</span></li>
+    <li><b class="p-mag">Magnet</b><span>Pulls nearby coins to you for 5 seconds.</span></li>
+    <li><b class="p-dbl">Double coins</b><span>Doubles every coin for 6 seconds — stacks on top of your combo.</span></li>
+    <li><b class="p-nit">Nitro</b><span>A hard speed burst. More distance, less reaction time.</span></li>
+    <li><b class="p-slo">Slow motion</b><span>Drops the world speed so you can thread heavy traffic.</span></li>
+    <li><b class="p-gho">Ghost</b><span>Drive straight through traffic, briefly. The rarest drop in the game.</span></li>
+  </ul>
+
+  <h2 class="exit">Reporting a bug</h2>
+
+  <details open>
+    <summary>What to include</summary>
+    <p>Send these four things to <a href="mailto:mkcenter007@gmail.com">mkcenter007@gmail.com</a> and I can usually reproduce it on the first try:</p>
+    <p>1 — your device model and iOS version · 2 — the level number · 3 — what you expected to happen · 4 — a screenshot or screen recording, if you can catch it.</p>
+  </details>
+
+  <footer>
+    <span>Turbo Highway 2026 · APProve</span>
+    <span><a href="privacy-policy.html">Privacy policy</a></span>
+  </footer>
+</div>
+
+</body>
+</html>
