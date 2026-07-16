@@ -1,0 +1,26 @@
+TURBO HIGHWAY - AUDIO LICENSE DOCUMENTATION
+============================================
+
+BACKGROUND MUSIC (music.mp3)
+----------------------------
+Source: Pixabay
+Track URL: https://pixabay.com/music/beats-racing-speed-driving-music-416549/
+License: Pixabay Content License
+License URL: https://pixabay.com/service/license-summary/
+Downloaded: June 2026
+
+License terms:
+- Free for commercial use (including monetized apps with ads and in-app purchases)
+- No attribution required
+- Modification permitted
+
+SOUND EFFECTS (all in-game SFX)
+-------------------------------
+Source: Original - generated programmatically via Web Audio API
+(oscillator-synthesized tones written in the game's own code)
+Owner: APProve (Mehrdad Kharazy Dehkharghani)
+License: Fully owned by the developer
+
+App: Turbo Highway (com.turbohighway.app)
+Developer: APProve
+Contact: mkcenter007@gmail.com
